@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI MCQ Generator from Notes</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>📘 AI MCQ Generator</h1>
+      <p>Turn your notes into a practice quiz in seconds</p>
+    </header>
+
+    <!-- Global error banner -->
+    <div id="errorBanner" class="error-banner hidden"></div>
+
+    <!-- ============ SCREEN 1: NOTES INPUT ============ -->
+    <section id="setupScreen" class="screen">
+      <div class="card">
+        <h2>1. Add Your Notes</h2>
+
+        <label for="notesTextarea">Paste your notes below</label>
+        <textarea
+          id="notesTextarea"
+          placeholder="Paste your study notes here..."
+          rows="10"
+        ></textarea>
+
+        <div class="upload-row">
+          <label for="fileInput" class="file-upload-label">📎 Upload .txt or .pdf file</label>
+          <input type="file" id="fileInput" accept=".txt,.pdf" hidden />
+          <span id="fileNameDisplay" class="file-name-display"></span>
+        </div>
+
+        <div id="uploadLoading" class="mini-loading hidden">Extracting text from file...</div>
+      </div>
+
+      <div class="card">
+        <h2>2. Choose Difficulty</h2>
+        <div class="difficulty-options">
+          <label class="difficulty-choice">
+            <input type="radio" name="difficulty" value="easy" checked />
+            <span>Easy</span>
+          </label>
+          <label class="difficulty-choice">
+            <input type="radio" name="difficulty" value="medium" />
+            <span>Medium</span>
+          </label>
+          <label class="difficulty-choice">
+            <input type="radio" name="difficulty" value="hard" />
+            <span>Hard</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>3. Number of Questions</h2>
+        <input
+          type="number"
+          id="numQuestionsInput"
+          min="1"
+          max="20"
+          value="5"
+        />
+        <p class="hint-text">Choose between 1 and 20 questions.</p>
+      </div>
+
+      <button id="generateBtn" class="primary-btn">✨ Generate MCQs</button>
+
+      <div id="generateLoading" class="loading-indicator hidden">
+        <div class="spinner"></div>
+        <p>Generating your quiz with AI... this can take a few seconds.</p>
+      </div>
+    </section>
+
+    <!-- ============ SCREEN 2: QUIZ ATTEMPT ============ -->
+    <section id="quizScreen" class="screen hidden">
+      <h2>Attempt the Quiz</h2>
+      <div id="quizProgress" class="quiz-progress"></div>
+      <div id="questionsContainer"></div>
+      <button id="submitQuizBtn" class="primary-btn">✅ Submit Quiz</button>
+    </section>
+
+    <!-- ============ SCREEN 3: RESULTS ============ -->
+    <section id="resultsScreen" class="screen hidden">
+      <div class="card score-card">
+        <h2>Your Score</h2>
+        <p id="scoreText" class="score-text"></p>
+      </div>
+
+      <h2>Review Your Answers</h2>
+      <div id="reviewContainer"></div>
+
+      <button id="restartBtn" class="primary-btn">🔁 Generate New Quiz</button>
+    </section>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
